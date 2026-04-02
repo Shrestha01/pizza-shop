@@ -34,3 +34,24 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+1. Database need [POSTGRESQL] used in this project. 
+2. Need to Create a .env file on your local machine  
+    DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE_NAME"
+
+
+create a table database and table.
+you can run seed.jsx to store same data [LIST OF AVAILABLE PIZZA IN THE STORE].
+
+
+
+
+
+
+
+
+
+
+
+
