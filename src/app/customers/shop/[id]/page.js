@@ -1,4 +1,4 @@
-import { query } from "@/lib/db";
+import { query } from "@/lib/db_temp";
 import { ChevronLeft, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import AddToCartButton from "@/components/pizza/AddToCartButton";

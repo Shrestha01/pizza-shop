@@ -1,5 +1,5 @@
 "use server"; // This tells Next.js to run this ONLY on the server
-import { query } from "@/lib/db";
+import { query } from "@/lib/db_temp";
 
 export async function createOrder(orderData) {
   const { customer_name, phone, address, items, total } = orderData;

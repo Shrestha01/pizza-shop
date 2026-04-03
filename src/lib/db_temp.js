@@ -1,11 +1,3 @@
-// import postgres from "postgres";
-// import { drizzle } from "drizzle-orm";
-
-// const connectionstring = process.env.DATABASE_URL;
-
-// const connection = postgres(connectionstring);
-
-// export const db = drizzle(connection);
 import { Pool } from "pg";
 
 // Use a global variable to store the pool across hot-reloads in development

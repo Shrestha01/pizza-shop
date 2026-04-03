@@ -1,8 +1,9 @@
-import { query } from "@/lib/db";
+import { query } from "@/lib/db_temp";
 import PizzaCard from "@/components/pizza/PizzaCard";
+import { db } from "@/lib/db";
 
 export default async function ShopPage() {
-  // 1. Fetch all available pizzas from your database
+  //1. Fetch all available pizzas from your database
   const result = await query(
     "SELECT * FROM pizzas WHERE is_available = TRUE ORDER BY id ASC",
   );
