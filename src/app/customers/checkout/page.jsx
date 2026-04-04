@@ -4,11 +4,21 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { CreditCard, Truck, MapPin, User, Phone } from "lucide-react";
 import { createOrder } from "@/app/actions/order";
+import { useSession } from "next-auth/react";
 
+import { useEffect } from "react";
 export default function CheckoutPage() {
   const { cart, cartCount, clearCart } = useCart();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const { data: session, status } = useSession(); // Get login status
+
+  // 1. Protection: If not logged in, send to login page
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/auth/login");
+    }
+  }, [status, router]);
 
   const subtotal = cart.reduce(
     (acc, item) => acc + item.base_price * item.quantity,

@@ -1,10 +1,12 @@
 "use client";
 import Link from "next/link";
 import { useCart } from "../app/context/CartContext";
-import { ShoppingCart, User, Pizza } from "lucide-react";
+import { ShoppingCart, User, Pizza, LogOut } from "lucide-react";
+import { useSession, signOut } from "next-auth/react"; // 1. Add these imports
 
 const Navbar = () => {
   const { cartCount } = useCart();
+  const { data: session, status } = useSession(); // 2. Get session data
 
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
@@ -35,12 +37,16 @@ const Navbar = () => {
             >
               Track Order
             </Link>
-            <Link
-              href="/dashboard"
-              className="text-orange-600 font-semibold bg-orange-50 px-3 py-1 rounded-full"
-            >
-              Admin
-            </Link>
+
+            {/* 3. Only show Admin link if user is an admin */}
+            {session?.user?.role === "admin" && (
+              <Link
+                href="/admin/orders"
+                className="text-orange-600 font-semibold bg-orange-50 px-3 py-1 rounded-full"
+              >
+                Admin
+              </Link>
+            )}
           </div>
 
           {/* Icons & Actions */}
@@ -55,12 +61,31 @@ const Navbar = () => {
               </span>
             </Link>
 
-            <Link
-              href="/login"
-              className="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-all"
-            >
-              <User size={24} />
-            </Link>
+            {/* 4. Conditional Login/Logout Button */}
+            {status === "authenticated" ? (
+              <div className="flex items-center gap-3">
+                <Link
+                  href="/dashboard"
+                  className="p-2 text-gray-600 hover:bg-gray-100 rounded-full"
+                >
+                  <User size={24} />
+                </Link>
+                <button
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                  className="p-2 text-red-500 hover:bg-red-50 rounded-full transition-all"
+                  title="Sign Out"
+                >
+                  <LogOut size={22} />
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/auth/login"
+                className="bg-slate-900 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-orange-600 transition-all"
+              >
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
       </div>
